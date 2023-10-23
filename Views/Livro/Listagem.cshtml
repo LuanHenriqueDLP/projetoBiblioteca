@@ -1,7 +1,17 @@
 @model List<Livro>
 @{
     ViewData["Title"] = "Listagem de Livros";
+    int FiltroPorPag = Int32.Parse(ViewData["livrosPorPagina"].ToString());
+    int paginaAtual = Int32.Parse(ViewData["paginaAtual"].ToString());
+    int livrosPorPagina = Model.Count;
+    int numDePaginas = 0;
+    if (Model.Count>0)
+    {
+        livrosPorPagina = (Model.Count<FiltroPorPag ? Model.Count : FiltroPorPag);
+        numDePaginas = Model.Count/livrosPorPagina + (Model.Count%livrosPorPagina== 0 ? 0 : 1);
+    }
 }
+
 <div class="row">
     <div class="col-md-12">
     <form class="form-inline" method="POST">
@@ -14,7 +24,26 @@
         <div class="form-group mb-2 mx-sm-3">
             <input type="text" placeholder="Filtro" name="Filtro" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+
+        <div class="mb-2">
+            <select name="itensPorPagina" id="itensPorPagina" class="custom-select">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value=@Model.Count>Todos</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-2 mx-sm-3">Pesquisar</button>
+
+        <div id="seletorPagina">
+            <span>Página:</span>
+            @for (int i = 1; i <= numDePaginas; i++)
+            {
+                <span><a href="/Livro/Listagem?paginaAtual=@i">@i </a> </span>
+            }
+        </div>
     </form>
     </div>
 </div>
@@ -33,14 +62,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(Livro l in Model)
+                    @for (int i = (paginaAtual-1)*livrosPorPagina; i < (livrosPorPagina*paginaAtual<Model.Count?livrosPorPagina*paginaAtual:Model.Count); i++)
                     {
                     <tr>
-                        <td>@l.Id</td>
-                        <td>@l.Titulo</td>
-                        <td>@l.Autor</td>
-                        <td>@l.Ano</td>
-                        <td><a href="/Livro/Edicao/@l.Id">Editar</a></td>
+                        <td>@Model[i].Id</td>
+                        <td>@Model[i].Titulo</td>
+                        <td>@Model[i].Autor</td>
+                        <td>@Model[i].Ano</td>
+                        <td><a href="/Livro/Edicao/@Model[i].Id">Editar</a></td>
                     </tr>
                     }
                 </tbody>

@@ -14402,6 +14402,11 @@
   "RootNamespace": "Biblioteca",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Usuario\\Admin.cshtml",
+      "TargetPath": "Views\\Usuario\\Admin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -14414,6 +14419,11 @@
     {
       "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Livro\\_FormCadastro.cshtml",
       "TargetPath": "Views\\Livro\\_FormCadastro.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Usuario\\Cadastro.cshtml",
+      "TargetPath": "Views\\Usuario\\Cadastro.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14462,8 +14472,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Usuario\\Edicao.cshtml",
+      "TargetPath": "Views\\Usuario\\Edicao.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Emprestimo\\Listagem.cshtml",
       "TargetPath": "Views\\Emprestimo\\Listagem.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Luan\\Desktop\\SENAC\\Módulo 2\\UC-07 Documentar e realizar manutenção de aplicações web\\Atividades\\Atividade1\\Biblioteca\\Views\\Usuario\\Listagem.cshtml",
+      "TargetPath": "Views\\Usuario\\Listagem.cshtml",
       "FileKind": "mvc"
     },
     {

@@ -34,16 +34,20 @@ namespace Biblioteca.Controllers
             return RedirectToAction("Listagem");
         }
 
-        public IActionResult Listagem(string tipoFiltro, string filtro)
+        public IActionResult Listagem(string tipoFiltro, string filtro, string itensPorPagina, int numDePaginas, int paginaAtual)
         {
             Autenticacao.CheckLogin(this);
             FiltrosEmprestimos objFiltro = null;
             if(!string.IsNullOrEmpty(filtro))
             {
                 objFiltro = new FiltrosEmprestimos();
-                objFiltro.Filtro = filtro;
+                objFiltro.Filtro = filtro.ToUpper();
                 objFiltro.TipoFiltro = tipoFiltro;
             }
+
+            ViewData["emprestimosPorPagina"] = (string.IsNullOrEmpty(itensPorPagina) ? 10 : int.Parse(itensPorPagina));
+            ViewData["paginaAtual"] = (paginaAtual != 0 ? paginaAtual : 1);
+
             EmprestimoService emprestimoService = new EmprestimoService();
             return View(emprestimoService.ListarTodos(objFiltro));
         }

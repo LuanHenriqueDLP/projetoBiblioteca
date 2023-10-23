@@ -18,15 +18,27 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/Livro/Cadastro" id="menuLivros">Livros</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link text-light dropdown-toggle" data-toggle="dropdown" href="#">Emprestimo</a>
+                            <a class="nav-link text-light dropdown-toggle" data-toggle="dropdown" href="#">Usuários</a>
+                            <div class="dropdown-menu" aria-labelledby="menuLivros">
+                                <a class="dropdown-item" href="/Usuario/Listagem">Listagem</a>
+                                <a class="dropdown-item" href="/Usuario/Cadastro">Cadastro</a>
+                            </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-light dropdown-toggle" data-toggle="dropdown" href="#">Livros</a>
+                            <div class="dropdown-menu" aria-labelledby="menuLivros">
+                                <a class="dropdown-item" href="/Livro/Listagem">Listagem</a>
+                                <a class="dropdown-item" href="/Livro/Cadastro">Cadastro</a>
+                            </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-light dropdown-toggle" data-toggle="dropdown" href="#">Emprestimos</a>
                             <div class="dropdown-menu" aria-labelledby="menuLivros">
                                 <a class="dropdown-item" href="/Emprestimo/Listagem">Listagem</a>
                                 <a class="dropdown-item" href="/Emprestimo/Cadastro">Cadastro</a>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/Usuario/Logout">Sair</a>
                         </li>
                     </ul>
                 </div>

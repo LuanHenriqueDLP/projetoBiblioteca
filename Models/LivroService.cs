@@ -40,11 +40,11 @@ namespace Biblioteca.Models
                     switch(filtro.TipoFiltro)
                     {
                         case "Autor":
-                            query = bc.Livros.Where(l => l.Autor.Contains(filtro.Filtro));
+                            query = bc.Livros.Where(l => l.Autor.ToUpper().Contains(filtro.Filtro));
                         break;
 
                         case "Titulo":
-                            query = bc.Livros.Where(l => l.Titulo.Contains(filtro.Filtro));
+                            query = bc.Livros.Where(l => l.Titulo.ToUpper().Contains(filtro.Filtro));
                         break;
 
                         default:
@@ -70,9 +70,7 @@ namespace Biblioteca.Models
                 //busca os livros onde o id não está entre os ids de livro em empréstimo
                 // utiliza uma subconsulta
                 return
-                    bc.Livros
-                    .Where(l =>  !(bc.Emprestimos.Where(e => e.Devolvido == false).Select(e => e.LivroId).Contains(l.Id)) )
-                    .ToList();
+                    bc.Livros.Where(l => !(bc.Emprestimos.Where(e => e.Devolvido == false).Select(e => e.LivroId).Contains(l.Id))).ToList();
             }
         }
 

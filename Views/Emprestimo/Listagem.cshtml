@@ -1,6 +1,15 @@
-@model ICollection<Emprestimo>
+@model IList<Emprestimo>
 @{
     ViewData["Title"] = "Listagem de Empréstimos";
+    int FiltroPorPag = Int32.Parse(ViewData["emprestimosPorPagina"].ToString());
+    int paginaAtual = Int32.Parse(ViewData["paginaAtual"].ToString());
+    int emprestimosPorPagina = Model.Count;
+    int numDePaginas = 0;
+    if (Model.Count>0)
+    {
+        emprestimosPorPagina = (Model.Count<FiltroPorPag ? Model.Count : FiltroPorPag);
+        numDePaginas = Model.Count/emprestimosPorPagina + (Model.Count%emprestimosPorPagina==0 ? 0 : 1);
+    }
 }
 
 <div class="row">
@@ -8,14 +17,33 @@
     <form class="form-inline" method="POST">
         <div class="form-group mb-2">
             <select name="TipoFiltro" class="form-control">
-                <option value="Usuario">Usuário</option>
                 <option value="Livro">Livro</option>
+                <option value="Usuario">Usuário</option>
             </select>
         </div>
         <div class="form-group mb-2 mx-sm-3">
             <input type="text" placeholder="Filtro" name="Filtro" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+
+        <div class="mb-2">
+            <select name="itensPorPagina" id="itensPorPagina" class="custom-select">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value=@Model.Count>Todos</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-2 mx-sm-3">Pesquisar</button>
+
+        <div id="seletorPagina">
+            <span>Página :</span>
+            @for (int i = 1; i <= numDePaginas; i++)
+            {
+                <span><a href="/Emprestimo/Listagem?paginaAtual=@i"> @i </a> </span>
+            }
+        </div>
     </form>
     </div>
 </div>
@@ -36,17 +64,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(Emprestimo e in Model)
+                    @for (int i = (paginaAtual-1)*emprestimosPorPagina; i < (paginaAtual*emprestimosPorPagina<Model.Count?paginaAtual*emprestimosPorPagina:Model.Count); i++)
                     {
-                    <tr>
-                        <td>@e.Id</td>
-                        <td>@e.NomeUsuario</td>
-                        <td>@e.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                        <td>@e.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                        <td>@e.Livro.Titulo</td>
-                        <td>@e.Livro.Autor</td>
-                        <td><a href="/Emprestimo/Edicao/@e.Id">Editar</a></td>
-                    </tr>
+                        var e = Model[i];
+
+                        if (e.DataDevolucao<DateTime.Today && e.Devolvido == false)
+                        {
+                            <tr class="text-danger">
+                                <td>@e.Id</td>
+                                <td>@e.NomeUsuario</td>
+                                <td>@e.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                                <td>@e.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                                <td>@e.Livro.Titulo</td>
+                                <td>@e.Livro.Autor</td>
+                                <td><a href="/Emprestimo/Edicao/@e.Id">Editar</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@e.Id</td>
+                                <td>@e.NomeUsuario</td>
+                                <td>@e.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                                <td>@e.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                                <td>@e.Livro.Titulo</td>
+                                <td>@e.Livro.Autor</td>
+                                <td><a href="/Emprestimo/Edicao/@e.Id">Editar</a></td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

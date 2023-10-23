@@ -1,0 +1,30 @@
+@model Usuario
+
+
+<h1 class="mb-2 row justify-content-md-center">Cadastro do Usuário</h1>
+
+    <div class="row justify-content-md-center">
+        <form asp-action="Cadastro" method="post" class="col-md-4">
+            <div class="form-group">
+                <input type="text" name="Nome" id="userNome" class="form-control" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <input type="text" name="Login" id="userLogin" class="form-control" placeholder="Login">
+            </div>
+            <div class="form-group">
+                <input type="text" name="Senha" id="userSenha" class="form-control" placeholder="Senha">
+            </div>
+
+            <div class="form-group">
+                <select name="tipo" id="userTipo" class="form-control">
+                    <option value="@Usuario.ADMIN">Administrador</option>
+                    <option value="@Usuario.PADRAO">Padrão</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Cadastrar" class="btn btn-primary">
+        </form>
+    </div>
+
+<br>
+<p class="text-danger">@ViewBag.LoginJaExiste</p>
